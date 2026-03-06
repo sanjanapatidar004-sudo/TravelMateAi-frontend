@@ -1,34 +1,43 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { apiCall } from "../services/api";
+import { toast } from "react-toastify";
 
 export default function AdminDashboard() {
-  const [stats] = useState({
-    totalTrips: 12,
-    totalBookings: 58,
-    totalUsers: 34,
-    revenue: 245000,
+  const [stats, setStats] = useState({
+    totalTrips: 0,
+    totalBookings: 0,
+    totalUsers: 0,
+    revenue: 0,
   });
 
-  const [recentBookings] = useState([
-    {
-      id: 1,
-      user: "Sanjana",
-      trip: "Indore → Goa",
-      amount: 9000,
-    },
-    {
-      id: 2,
-      user: "Rahul",
-      trip: "Delhi → Jaipur",
-      amount: 2500,
-    },
-    {
-      id: 3,
-      user: "Priya",
-      trip: "Bhopal → Manali",
-      amount: 6000,
-    },
-  ]);
+const [recentBookings, setRecentBookings] = useState([]);
 
+  useEffect(() => {
+
+    const fetchDashboard = async () => {
+
+      const res = await apiCall("/reports/dashboard");
+
+      if (res.status === "success") {
+
+        setStats({
+          totalTrips: res.data.totalTrips,
+          totalBookings: res.data.totalBookings,
+          totalUsers: res.data.totalUsers,
+          revenue: res.data.revenue
+        });
+
+        setRecentBookings(res.data.recentBookings || []);
+
+      } else {
+        toast.error("Failed to load dashboard data");
+      }
+
+    };
+
+    fetchDashboard();
+
+  }, []);
   return (
     <div className="min-h-screen bg-gray-100 p-8">
       <h1 className="text-3xl font-bold mb-8 text-gray-800">
@@ -105,8 +114,15 @@ export default function AdminDashboard() {
           <tbody>
             {recentBookings.map((booking) => (
               <tr key={booking.id} className="border-b hover:bg-gray-50">
-                <td className="py-3">{booking.user}</td>
-                <td className="py-3">{booking.trip}</td>
+
+                <td className="py-3">
+                  {booking.userName}
+                </td>
+
+                <td className="py-3">
+                  {booking.tripTitle}
+                </td>
+
                 <td className="py-3 font-semibold text-green-600">
                   ₹{booking.amount}
                 </td>

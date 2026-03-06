@@ -10,6 +10,7 @@ export default function Register() {
     name: "",
     email: "",
     password: "",
+    phone: "",
   });
 
   const handleChange = (e) => {
@@ -42,30 +43,44 @@ const handleSubmit = async (e) => {
         </p>
 
         <form onSubmit={handleSubmit}>
-          <input
-            type="text"
-            name="name"
-            placeholder="Enter your full name"
-            className="w-full p-3 border border-gray-300 rounded-lg mb-4 focus:outline-none focus:ring-2 focus:ring-green-400"
-            onChange={handleChange}
-          />
+        <input
+  type="text"
+  name="name"
+  placeholder="Enter your full name"
+  value={form.name}
+  onChange={handleChange}
+  className="w-full p-2 border border-gray-300 rounded-lg mb-4 focus:outline-none focus:ring-2 focus:ring-green-300"
+  required
+/>
 
-          <input
-            type="email"
-            name="email"
-            placeholder="Enter your email"
-            className="w-full p-3 border border-gray-300 rounded-lg mb-4 focus:outline-none focus:ring-2 focus:ring-green-400"
-            onChange={handleChange}
-          />
+<input
+  type="email"
+  name="email"
+  placeholder="Enter your email"
+  value={form.email}
+  onChange={handleChange}
+  className="w-full p-2 border border-gray-300 rounded-lg mb-4 focus:outline-none focus:ring-2 focus:ring-green-300"
+  required
+/>
 
-          <input
-            type="password"
-            name="password"
-            placeholder="Create a password"
-            className="w-full p-3 border border-gray-300 rounded-lg mb-4 focus:outline-none focus:ring-2 focus:ring-green-400"
-            onChange={handleChange}
-          />
+<input
+  type="password"
+  name="password"
+  placeholder="Create a password"
+  value={form.password}
+  onChange={handleChange}
+  className="w-full p-2 border border-gray-300 rounded-lg mb-4 focus:outline-none focus:ring-2 focus:ring-green-300"
+  required
+/>
 
+<input
+ type="text"
+ name="phone"
+ placeholder="Phone (optional)"
+ value={form.phone}
+ onChange={handleChange}
+  className="w-full p-2 border border-gray-300 rounded-lg mb-4 focus:outline-none focus:ring-2 focus:ring-green-300"
+/>
           <button className="w-full bg-green-600 text-white py-3 rounded-lg hover:bg-green-700 transition duration-300">
             Register
           </button>

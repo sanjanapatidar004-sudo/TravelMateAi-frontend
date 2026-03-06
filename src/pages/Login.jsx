@@ -23,14 +23,19 @@ const handleSubmit = async (e) => {
 
   const response = await apiCall("/users/login", "POST", form);
 
-  if (response.status === "success") {
+  if (response.token) {
 
-    localStorage.setItem("token", response.data.token);
-    localStorage.setItem("user", JSON.stringify(response.data));
+    localStorage.setItem("token", response.token);
+    localStorage.setItem("user", JSON.stringify(response.user));
+    localStorage.setItem("role", response.user.role);
 
     toast.success("Login successful 🚀");
 
-    navigate("/trips");
+    if(response.user.role === "ADMIN"){
+      navigate("/admin")
+    }else {
+      navigate("/trips")
+    }
   } else {
     toast.error(response.message || "Invalid credentials");
   }
@@ -52,8 +57,8 @@ const handleSubmit = async (e) => {
             placeholder="Enter your email"
             value={form.email}
             onChange={handleChange}
-            required
             className="w-full p-3 border border-gray-300 rounded-lg mb-4 focus:outline-none focus:ring-2 focus:ring-blue-400"
+            required
           />
 
           <input
@@ -62,8 +67,8 @@ const handleSubmit = async (e) => {
             placeholder="Enter your password"
             value={form.password}
             onChange={handleChange}
-            required
             className="w-full p-3 border border-gray-300 rounded-lg mb-4 focus:outline-none focus:ring-2 focus:ring-blue-400"
+            required
           />
 
           <button

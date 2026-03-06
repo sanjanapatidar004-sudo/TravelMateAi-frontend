@@ -7,6 +7,7 @@ export default function TripDetails() {
 
   const { id } = useParams();
   const [trip, setTrip] = useState(null);
+  const [seats, setSeats] = useState(1)
 
   useEffect(() => {
 
@@ -26,19 +27,20 @@ export default function TripDetails() {
 
   }, [id]);
 
-  const handleBooking = async () => {
+ const handleBooking = async () => {
 
     const res = await apiCall("/bookings", "POST", {
-      tripId: id
-    });
+      tripId: Number(id),
+      numberOfSeats: seats
+    })
 
     if (res.status === "success") {
-      toast.success("Trip booked successfully 🎉");
+      toast.success("Trip booked successfully!")
     } else {
-      toast.error(res.message || "Booking failed");
+      toast.error(res.message || "Booking failed")
     }
 
-  };
+  }
 
   if (!trip) {
     return <p className="text-center mt-20">Loading trip...</p>;
@@ -67,6 +69,23 @@ export default function TripDetails() {
       <p className="text-xl font-semibold mb-6">
         Price: ₹ {trip.price}
       </p>
+
+      <div className="mb-6">
+
+        <label className="font-semibold mr-3">
+          Select Seats:
+        </label>
+
+        <input
+          type="number"
+          min="1"
+          max="10"
+          value={seats}
+          onChange={(e) => setSeats(e.target.value)}
+          className="border p-2 w-20"
+        />
+
+      </div>
 
       <button
         onClick={handleBooking}
