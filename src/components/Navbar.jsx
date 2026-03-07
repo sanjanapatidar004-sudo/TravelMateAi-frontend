@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/set-state-in-effect */
 import { Link, useNavigate } from "react-router-dom"
 import { useState, useEffect } from "react"
 
@@ -9,12 +10,18 @@ const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false)
 
   useEffect(() => {
-    const storedUser = localStorage.getItem("user")
-    if (storedUser) {
-      // eslint-disable-next-line react-hooks/set-state-in-effect
-      setUser(JSON.parse(storedUser))
+  try {
+    const storedUser = localStorage.getItem("user");
+
+    if (storedUser && storedUser !== "undefined") {
+      setUser(JSON.parse(storedUser));
     }
-  }, [])
+  // eslint-disable-next-line no-unused-vars
+  } catch (error) {
+    console.error("Invalid user in localStorage");
+    setUser(null);
+  }
+}, []);
 
   const handleLogout = () => {
     localStorage.removeItem("token")

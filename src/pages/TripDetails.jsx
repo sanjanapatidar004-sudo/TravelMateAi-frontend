@@ -32,7 +32,7 @@ export default function TripDetails() {
     const res = await apiCall("/bookings", "POST", {
       tripId: Number(id),
       numberOfSeats: seats
-    })
+    });
 
     if (res.status === "success") {
       toast.success("Trip booked successfully!")
@@ -81,7 +81,7 @@ export default function TripDetails() {
           min="1"
           max="10"
           value={seats}
-          onChange={(e) => setSeats(e.target.value)}
+          onChange={(e) => setSeats(Number(e.target.value))}
           className="border p-2 w-20"
         />
 

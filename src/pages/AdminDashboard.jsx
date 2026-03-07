@@ -20,12 +20,12 @@ const [recentBookings, setRecentBookings] = useState([]);
 
       if (res.status === "success") {
 
-        setStats({
-          totalTrips: res.data.totalTrips,
-          totalBookings: res.data.totalBookings,
-          totalUsers: res.data.totalUsers,
-          revenue: res.data.revenue
-        });
+      setStats({
+        totalTrips: res.data.trips?.totalTrips || 0,
+        totalUsers: res.data.users?.totalUsers || 0,
+        totalBookings: res.data.bookings?.totalBookings || 0,
+        revenue: res.data.revenue?.totalRevenue || 0
+      });
 
         setRecentBookings(res.data.recentBookings || []);
 

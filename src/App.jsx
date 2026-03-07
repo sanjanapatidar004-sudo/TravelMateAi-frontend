@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router-dom"
+import {BrowserRouter, Routes, Route } from "react-router-dom"
 import Navbar from "./components/Navbar"
 import { ToastContainer } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
@@ -15,11 +15,16 @@ import TripDetails from "./pages/TripDetails";
 import MyBookings from "./pages/MyBookings";
 import ProtectedRoutes from "./components/ProtectedRoutes";
 import AdminDashboard from "./pages/AdminDashboard";
+import Recommendations from "./pages/Recommendations" ;
+import Profile from "./pages/Profile";
+import AdminTrips from "./pages/AdminTrips";
+import AddTrip from "./pages/AddTrip";
 function App() {
   return (
     <>
       <Navbar />
       <div className="pt-20">
+        <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/planner" element={<Planner />} />
@@ -29,6 +34,7 @@ function App() {
           <Route path="/trips" element={<ProtectedRoutes><Trips /></ProtectedRoutes>} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/recommendations" element={<Recommendations/>}/>
           <Route path="/trip/:id" element={<ProtectedRoutes><TripDetails /></ProtectedRoutes>} />
           <Route
           path="/my-bookings"
@@ -38,7 +44,8 @@ function App() {
             </ProtectedRoutes>
           }
           />
-           <Route
+
+          <Route
           path="/admin"
           element={
             <ProtectedRoutes roleRequired="ADMIN">
@@ -46,8 +53,27 @@ function App() {
             </ProtectedRoutes>
           }
          />
+
+         <Route path="/profile" element={
+            <ProtectedRoutes>
+              <Profile/>
+            </ProtectedRoutes>
+          }/>
+
+          <Route path="/admin/trips" element={
+            <ProtectedRoutes roleRequired="ADMIN">
+              <AdminTrips/>
+            </ProtectedRoutes>
+          }/>
+
+          <Route path="/admin/add-trip" element={
+            <ProtectedRoutes roleRequired="ADMIN">
+              <AddTrip/>
+            </ProtectedRoutes>
+          }/>
+          
         </Routes>
-        
+        </BrowserRouter>
       </div>
 
       <ToastContainer 

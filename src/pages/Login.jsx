@@ -23,21 +23,23 @@ const handleSubmit = async (e) => {
 
   const response = await apiCall("/users/login", "POST", form);
 
-  if (response.token) {
+  if (response?.data?.token) {
 
-    localStorage.setItem("token", response.token);
-    localStorage.setItem("user", JSON.stringify(response.user));
-    localStorage.setItem("role", response.user.role);
+    const userData = response.data;
+
+    localStorage.setItem("token", userData.token);
+    localStorage.setItem("user", JSON.stringify(userData));
+    
 
     toast.success("Login successful 🚀");
 
-    if(response.user.role === "ADMIN"){
+    if(userData.role === "ADMIN"){
       navigate("/admin")
     }else {
       navigate("/trips")
     }
   } else {
-    toast.error(response.message || "Invalid credentials");
+    toast.error("Invalid credentials");
   }
 };
   return (
