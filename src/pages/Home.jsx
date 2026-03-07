@@ -31,11 +31,13 @@ const Home = () => {
         <div className="relative z-10 text-center px-6 max-w-3xl">
 
           <h1 className="text-5xl md:text-6xl font-bold mb-6 leading-tight">
-            Travel planning, <br /> without the stress.
+            Plan your next adventure
+             <br />
+              without the stress.
           </h1>
 
           <p className="text-lg text-gray-200 mb-8">
-            Tell us where you want to go and we’ll help you build a
+            From mountains to beaches, tell us your travel style and we’ll help you build a
             simple, personalized travel plan in seconds.
           </p>
 
@@ -45,14 +47,14 @@ const Home = () => {
               onClick={() => navigate("/planner")}
               className="px-8 py-3 bg-gradient-to-r from-sky-500 to-blue-600 rounded-full font-semibold hover:scale-105 hover:shadow-2xl transition"
             >
-              Plan My Trip
+              Plan My Trip ✈️
             </button>
 
             <button
               onClick={() => navigate("/explore")}
               className="px-8 py-3 border border-white rounded-full hover:bg-white hover:text-black transition"
             >
-              Explore Destinations
+              Explore Destinations 🌍
             </button>
 
           </div>
@@ -241,7 +243,7 @@ const Home = () => {
 
       <div className="bg-sky-50 p-8 rounded-3xl shadow-md">
         <p className="text-gray-600 mb-4">
-          "Planning our trip to Bali became so easy. The itinerary was
+          "Planning our trip to Manali became so easy. The itinerary was
           perfectly organized and saved us hours of research."
         </p>
         <h4 className="font-semibold text-sky-700">
@@ -328,11 +330,11 @@ const Home = () => {
       <section className="py-24 bg-white text-center">
 
         <h2 className="text-4xl font-bold text-sky-700 mb-6">
-          Your next trip starts here
+          Ready for your next adventure?
         </h2>
 
         <p className="text-gray-600 mb-10">
-          Create your itinerary in less than a minute.
+          Build your personalized travel plan in less than a minute.
         </p>
 
         <button

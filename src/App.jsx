@@ -1,4 +1,4 @@
-import {BrowserRouter, Routes, Route } from "react-router-dom"
+import { Routes, Route } from "react-router-dom"
 import Navbar from "./components/Navbar"
 import { ToastContainer } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
@@ -22,9 +22,10 @@ import AddTrip from "./pages/AddTrip";
 function App() {
   return (
     <>
+  
       <Navbar />
       <div className="pt-20">
-        <BrowserRouter>
+        
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/planner" element={<Planner />} />
@@ -73,7 +74,7 @@ function App() {
           }/>
           
         </Routes>
-        </BrowserRouter>
+        
       </div>
 
       <ToastContainer 
@@ -83,7 +84,8 @@ function App() {
       />
       
        <Footer />
-    </>
+   </>
+  
   )
 }
 
