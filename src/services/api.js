@@ -21,11 +21,21 @@ export const apiCall = async (endpoint, method = "GET", body = null) => {
 
     const response = await fetch(`${BASE_URL}${endpoint}`, options);
 
-    const data = await response.json();
+    if (response.status === 401) {
+      localStorage.removeItem("token");
+      localStorage.removeItem("user");
+      window.location.href = "/login";
+      return;
+    }
 
-    return data;
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    return await response.json();
+
   } catch (error) {
     console.error("API Error:", error);
-    return { status: "error", message: "Something went wrong" };
+    return null;
   }
 };

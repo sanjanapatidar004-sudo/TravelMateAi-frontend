@@ -35,8 +35,15 @@ function App() {
           <Route path="/trips" element={<ProtectedRoutes><Trips /></ProtectedRoutes>} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/recommendations" element={<Recommendations/>}/>
           <Route path="/trip/:id" element={<ProtectedRoutes><TripDetails /></ProtectedRoutes>} />
+          <Route 
+            path="/recommendations" 
+            element={
+              <ProtectedRoutes>
+                <Recommendations/>
+             </ProtectedRoutes>
+            }
+          />
           <Route
           path="/my-bookings"
           element={

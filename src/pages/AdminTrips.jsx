@@ -7,15 +7,21 @@ export default function AdminTrips(){
 
   useEffect(()=>{
 
-    const fetchTrips = async()=>{
+    const fetchTrips = async () => {
+      try {
+        const res = await apiCall("/trips?page=0&size=10");
 
-      const res = await apiCall("/trips");
-
-      if(res.status==="success"){
-        setTrips(res.data);
+        if (res?.data?.content) {
+          setTrips(res.data.content);
+        } else {
+          setTrips([]);
+        }
+ 
+      } catch (error) {
+        console.error("Failed to load trips", error);
+          setTrips([]);
       }
-
-    }
+    };
 
     fetchTrips();
 

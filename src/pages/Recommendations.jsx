@@ -3,23 +3,53 @@ import { apiCall } from "../services/api";
 
 export default function Recommendations() {
 
-  const [trips,setTrips] = useState([]);
+  const [recommendations, setRecommendations] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
+  
+  const fetchRecommendations = async () => {
+  try {
+    setLoading(true);
 
-  useEffect(()=>{
+    const res = await apiCall("/recommendations");
 
-    const fetchRecommendations = async()=>{
+    setRecommendations(res?.data || []);
 
-      const res = await apiCall("/recommendations");
+  } catch (error) {
+    console.error("Recommendation service failed", error);
+    setError(true);
+  } finally {
+    setLoading(false);
+  }
+};
 
-      if(res.status==="success"){
-        setTrips(res.data);
-      }
+useEffect(() => {
+  fetchRecommendations();
+}, []);
 
-    }
+if (loading) {
+    return (
+      <div className="flex justify-center mt-20">
+        <div className="animate-spin h-10 w-10 border-4 border-blue-500 rounded-full"></div>
+      </div>
+    );
+  }
 
-    fetchRecommendations();
+  if (error) {
+    return (
+      <div className="text-center mt-20 text-red-500">
+        Recommendation service unavailable
+      </div>
+    );
+  }
 
-  },[])
+  if (!recommendations || recommendations.length === 0) {
+    return (
+      <div className="text-center mt-20 text-gray-500">
+        No recommendations available right now.
+      </div>
+    );
+  }
 
   return(
 
@@ -31,11 +61,12 @@ export default function Recommendations() {
 
       <div className="grid md:grid-cols-3 gap-6">
 
-        {trips.map(trip=>(
+        {recommendations.map(trip=>(
           <div key={trip.id} className="border p-4 rounded-lg">
 
             <img
             src={trip.imageUrl}
+            alt={trip.title}
             className="h-48 w-full object-cover rounded"
             />
 

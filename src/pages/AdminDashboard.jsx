@@ -1,8 +1,12 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { apiCall } from "../services/api";
 import { toast } from "react-toastify";
 
 export default function AdminDashboard() {
+
+  const navigate = useNavigate();
+
   const [stats, setStats] = useState({
     totalTrips: 0,
     totalBookings: 0,
@@ -21,8 +25,6 @@ const [recentBookings, setRecentBookings] = useState([]);
       if (res.status === "success") {
 
       setStats({
-        totalTrips: res.data.trips?.totalTrips || 0,
-        totalUsers: res.data.users?.totalUsers || 0,
         totalBookings: res.data.bookings?.totalBookings || 0,
         revenue: res.data.revenue?.totalRevenue || 0
       });
@@ -82,16 +84,23 @@ const [recentBookings, setRecentBookings] = useState([]);
         </h2>
 
         <div className="flex gap-4">
-          <button className="bg-blue-600 text-white px-5 py-2 rounded-lg hover:bg-blue-700 transition">
-            Add New Trip
+
+          <button 
+            onClick={() => navigate("/admin/add-trip")}
+            className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition">
+              Add New Trip
           </button>
 
-          <button className="bg-yellow-500 text-white px-5 py-2 rounded-lg hover:bg-yellow-600 transition">
-            Edit Trips
+          <button
+            onClick={() => navigate("/admin/trips")}
+            className="bg-yellow-500 text-white px-4 py-2 rounded-lg hover:bg-yellow-600 transition">
+              Edit Trips
           </button>
 
-          <button className="bg-red-500 text-white px-5 py-2 rounded-lg hover:bg-red-600 transition">
-            Delete Trips
+          <button 
+            onClick={() => navigate("/admin/trips")}
+            className="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition">
+              Delete Trips
           </button>
         </div>
       </div>
