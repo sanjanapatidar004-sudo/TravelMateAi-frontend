@@ -28,7 +28,7 @@ const handleSubmit = async (e) => {
     const userData = response.data;
 
     localStorage.setItem("token", userData.token);
-    localStorage.setItem("user", JSON.stringify(userData.user));
+    localStorage.setItem("user", JSON.stringify(userData));
     window.dispatchEvent(new Event("storage"));
 
     toast.success("Login successful 🚀");

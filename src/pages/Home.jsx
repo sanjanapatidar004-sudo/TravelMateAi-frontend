@@ -1,5 +1,8 @@
 import { useEffect } from "react"
 import { useNavigate } from "react-router-dom"
+// eslint-disable-next-line no-unused-vars
+import { motion } from "framer-motion"
+
 
 const Home = () => {
 
@@ -14,7 +17,7 @@ const Home = () => {
 
       {/* ================= HERO ================= */}
 
-      <section className="relative h-screen flex items-center justify-center text-white">
+      <section className="relative h-screen flex items-center justify-center text-white overflow-hidden">
 
         <video
           autoPlay
@@ -30,11 +33,16 @@ const Home = () => {
 
         <div className="relative z-10 text-center px-6 max-w-3xl">
 
-          <h1 className="text-5xl md:text-6xl font-bold mb-6 leading-tight">
+        <motion.h1
+  initial={{ opacity: 0, y: 40 }}
+  animate={{ opacity: 1, y: 0 }}
+  transition={{ duration: 0.8 }}
+  className="text-5xl md:text-6xl font-bold mb-6 leading-tight"
+>
             Plan your next adventure
              <br />
               without the stress.
-          </h1>
+         </motion.h1>
 
           <p className="text-lg text-gray-200 mb-8">
             From mountains to beaches, tell us your travel style and we’ll help you build a
@@ -60,13 +68,15 @@ const Home = () => {
           </div>
 
         </div>
+        
       </section>
 
+      
       {/* ================= WHY TRAVELERS LIKE IT ================= */}
 
       <section className="py-24 bg-gradient-to-b from-sky-100 to-white">
 
-        <div className="max-w-6xl mx-auto px-6">
+        <div className="max-w-6xl mx-auto px-6 py-10">
 
           <h2 className="text-4xl font-bold text-center text-sky-700 mb-16">
             Why travelers enjoy using it
@@ -74,7 +84,7 @@ const Home = () => {
 
           <div className="grid md:grid-cols-3 gap-10">
 
-            <div className="bg-white p-8 rounded-3xl shadow-md hover:shadow-xl transition">
+            <div className="backdrop-blur-lg bg-white/80 p-6 rounded-2xl shadow-xl border border-gray-100 hover:scale-105 transition duration-300">
               <h3 className="text-xl font-semibold mb-3 text-sky-700">
                 ⚡ Quick trip plans
               </h3>
@@ -83,7 +93,7 @@ const Home = () => {
               </p>
             </div>
 
-            <div className="bg-white p-8 rounded-3xl shadow-md hover:shadow-xl transition">
+            <div className="backdrop-blur-lg bg-white/80 p-6 rounded-2xl shadow-xl border border-gray-100 hover:scale-105 transition duration-300">
               <h3 className="text-xl font-semibold mb-3 text-sky-700">
                 💰 Budget friendly
               </h3>
@@ -92,7 +102,7 @@ const Home = () => {
               </p>
             </div>
 
-            <div className="bg-white p-8 rounded-3xl shadow-md hover:shadow-xl transition">
+            <div className="backdrop-blur-lg bg-white/80 p-6 rounded-2xl shadow-xl border border-gray-100 hover:scale-105 transition duration-300">
               <h3 className="text-xl font-semibold mb-3 text-sky-700">
                 🌍 Personalized suggestions
               </h3>
@@ -210,7 +220,7 @@ const Home = () => {
               className="w-full h-72 object-cover group-hover:scale-110 transition duration-500"
             />
 
-            <div className="absolute inset-0 bg-black/30"></div>
+            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
 
             <h3 className="absolute bottom-4 left-4 text-white text-xl font-semibold">
               {place.name}
@@ -241,24 +251,36 @@ const Home = () => {
 
     <div className="grid md:grid-cols-2 gap-10">
 
-      <div className="bg-sky-50 p-8 rounded-3xl shadow-md">
+      <div className="bg-sky-50 p-8 rounded-xl shadow-md">
         <p className="text-gray-600 mb-4">
           "Planning our trip to Manali became so easy. The itinerary was
           perfectly organized and saved us hours of research."
         </p>
-        <h4 className="font-semibold text-sky-700">
-          — Aditi Sharma
-        </h4>
+        <div className="flex items-center justify-center gap-3 mt-4">
+          <img
+            src="https://i.pravatar.cc/40?img=5"
+            className="w-10 h-10 rounded-full"
+        />
+          <h4 className="font-semibold text-sky-700">
+            Aditi Sharma
+          </h4>
+        </div>
       </div>
 
-      <div className="bg-sky-50 p-8 rounded-3xl shadow-md">
+      <div className="bg-sky-50 p-8 rounded-xl shadow-md">
         <p className="text-gray-600 mb-4">
           "This travel planner helped me discover places I didn't even
           know existed. Super useful and simple."
         </p>
-        <h4 className="font-semibold text-sky-700">
-          — Rahul Verma
-        </h4>
+         <div className="flex items-center justify-center gap-3 mt-4">
+          <img
+            src="https://i.pravatar.cc/40?img=12"
+            className="w-10 h-10 rounded-full"
+        />
+          <h4 className="font-semibold text-sky-700">
+            Rahul Verma
+          </h4>
+        </div>
       </div>
 
     </div>
@@ -306,17 +328,17 @@ const Home = () => {
 
         <div className="max-w-5xl mx-auto grid md:grid-cols-3 gap-8 text-center">
 
-          <div>
+          <div className="bg-white/10 backdrop-blur-lg rounded-xl p-6 hover:scale-105 transition">
             <h3 className="text-4xl font-bold">10,000+</h3>
             <p className="opacity-90">Trips planned</p>
           </div>
 
-          <div>
+          <div className="bg-white/10 backdrop-blur-lg rounded-xl p-6 hover:scale-105 transition">
             <h3 className="text-4xl font-bold">5,000+</h3>
             <p className="opacity-90">Travelers helped</p>
           </div>
 
-          <div>
+          <div className="bg-white/10 backdrop-blur-lg rounded-xl p-6 hover:scale-105 transition">
             <h3 className="text-4xl font-bold">120+</h3>
             <p className="opacity-90">Destinations</p>
           </div>
@@ -327,7 +349,7 @@ const Home = () => {
 
       {/* ================= CTA ================= */}
 
-      <section className="py-24 bg-white text-center">
+      <section className="py-24 bg-gradient-to-r from-sky-50 to-blue-100 text-center">
 
         <h2 className="text-4xl font-bold text-sky-700 mb-6">
           Ready for your next adventure?
